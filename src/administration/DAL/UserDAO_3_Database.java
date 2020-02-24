@@ -4,9 +4,14 @@ import administration.DTO.UserDTO;
 
 import java.util.List;
 
-public class UserDAO implements IUserDAO {
+public class UserDAO_3_Database implements IUserDAO {
     @Override
     public UserDTO getUser(int userId) throws DALException {
+        return null;
+    }
+
+    @Override
+    public UserDTO getUser(String username) throws DALException {
         return null;
     }
 
@@ -17,7 +22,7 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public void createUser(UserDTO user) throws DALException {
-
+        return;
     }
 
     @Override
