@@ -40,7 +40,7 @@ public class Main {
                 userDTO.setRoles(enterRoles());
                 userDTO.setUserId(enterID());
                 try{
-                    userDAO_1_session.createUser(userDTO);
+                    userDAO_2_file.createUser(userDTO);
                 }
                 catch (IUserDAO.DALException exception){
                     System.out.println("Brugeren kunne ikke oprettes i SESSION ARRAYLIST fordi: " + exception.toString());
@@ -61,7 +61,7 @@ public class Main {
                 userDTO.setCpr(enterCPR());
                 userDTO.setRoles(enterRoles());
                 try{
-                    userDAO_1_session.updateUser(userDTO);
+                    userDAO_2_file.updateUser(userDTO);
                 }
                 catch (IUserDAO.DALException exception){
                     System.out.println("Brugeren kunne ikke opdateres i SESSION ARRAYLIST fordi: " + exception.toString());
@@ -79,7 +79,7 @@ public class Main {
                 String confirm = scanner.nextLine();
                 if(confirm.toLowerCase().equals("ja")){
                     try{
-                        userDAO_1_session.deleteUser(userDTO.getUserId());
+                        userDAO_2_file.deleteUser(userDTO.getUserId());
                         System.out.println("Brugeren er nu slettet. Klik Enter for at forsætte");
                         scanner.nextLine();
                     }
@@ -99,7 +99,7 @@ public class Main {
             }
             if(command.equals("5")){
                 try {
-                    List<UserDTO> users = userDAO_1_session.getUserList();
+                    List<UserDTO> users = userDAO_2_file.getUserList();
                     for(UserDTO user : users){
                         System.out.println(user);
                     }
@@ -210,7 +210,7 @@ public class Main {
             System.out.println("Indtast ID for at finde brugeren");
             int userId = Integer.parseInt(scanner.nextLine());
             try{
-                userDTO = userDAO_1_session.getUser(userId);
+                userDTO = userDAO_2_file.getUser(userId);
                 if(userDTO == null){
                     System.out.println("Brugeren eksisterer ikke");
                 }
@@ -223,7 +223,7 @@ public class Main {
             System.out.println("Indtast brugernavn for at finde brugeren");
             String username = scanner.nextLine();
             try{
-                userDTO = userDAO_1_session.getUser(username);
+                userDTO = userDAO_2_file.getUser(username);
                 if(userDTO == null){
                     System.out.println("Brugeren eksisterer ikke");
                 }
