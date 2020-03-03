@@ -201,7 +201,7 @@ public class Main {
     }
 
     public static UserDTO enterFindUser(){
-        System.out.println("Ønsker brugeren findes via ID eller brugernavn?");
+        System.out.println("Ønsker brugeren fundet via ID eller brugernavn?");
         System.out.println("1. ID");
         System.out.println("2. Brugernavn");
         int command = Integer.parseInt(scanner.nextLine());
