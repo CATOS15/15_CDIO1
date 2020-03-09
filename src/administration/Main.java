@@ -13,11 +13,13 @@ import java.util.UUID;
 
 public class Main {
     public static Scanner scanner;
-    public static UserDAO_1_Session userDAO_1_session = new UserDAO_1_Session();
-    public static UserDAO_2_File userDAO_2_file = new UserDAO_2_File();
-    public static UserDAO_3_Database userDAO_3_database = new UserDAO_3_Database();
+    public static IUserDAO iUserDAO;
 
     public static void main(String[] args) {
+        //iUserDAO = new UserDAO_1_Session();
+        //iUserDAO = new UserDAO_2_File();
+        iUserDAO = new UserDAO_3_Database();
+
         scanner = new Scanner(System.in);
 
         while(true){
@@ -40,7 +42,7 @@ public class Main {
                 userDTO.setRoles(enterRoles());
                 userDTO.setUserId(enterID());
                 try{
-                    userDAO_3_database.createUser(userDTO);
+                    iUserDAO.createUser(userDTO);
                 }
                 catch (IUserDAO.DALException exception){
                     System.out.println("Brugeren kunne ikke oprettes i SESSION ARRAYLIST fordi: " + exception.toString());
@@ -61,7 +63,7 @@ public class Main {
                 userDTO.setCpr(enterCPR());
                 userDTO.setRoles(enterRoles());
                 try{
-                    userDAO_3_database.updateUser(userDTO);
+                    iUserDAO.updateUser(userDTO);
                 }
                 catch (IUserDAO.DALException exception){
                     System.out.println("Brugeren kunne ikke opdateres i SESSION ARRAYLIST fordi: " + exception.toString());
@@ -79,7 +81,7 @@ public class Main {
                 String confirm = scanner.nextLine();
                 if(confirm.toLowerCase().equals("ja")){
                     try{
-                        userDAO_3_database.deleteUser(userDTO.getUserId());
+                        iUserDAO.deleteUser(userDTO.getUserId());
                         System.out.println("Brugeren er nu slettet. Klik Enter for at forsætte");
                         scanner.nextLine();
                     }
@@ -99,7 +101,7 @@ public class Main {
             }
             if(command.equals("5")){
                 try {
-                    List<UserDTO> users = userDAO_3_database.getUserList();
+                    List<UserDTO> users = iUserDAO.getUserList();
                     for(UserDTO user : users){
                         System.out.println(user);
                     }
@@ -210,7 +212,7 @@ public class Main {
             System.out.println("Indtast ID for at finde brugeren");
             int userId = Integer.parseInt(scanner.nextLine());
             try{
-                userDTO = userDAO_3_database.getUser(userId);
+                userDTO = iUserDAO.getUser(userId);
                 if(userDTO == null){
                     System.out.println("Brugeren eksisterer ikke");
                 }
@@ -223,7 +225,7 @@ public class Main {
             System.out.println("Indtast brugernavn for at finde brugeren");
             String username = scanner.nextLine();
             try{
-                userDTO = userDAO_3_database.getUser(username);
+                userDTO = iUserDAO.getUser(username);
                 if(userDTO == null){
                     System.out.println("Brugeren eksisterer ikke");
                 }
