@@ -126,6 +126,7 @@ public class UserDAO_3_Database implements IUserDAO {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/userdao3", "root", "kagemand123");
         } catch (SQLException | ClassNotFoundException sqlException) {
             System.out.println(sqlException);
+            sqlException.printStackTrace();
         }
     }
     private ResultSet executeSelect(String statement) throws SQLException{
